@@ -3,5 +3,9 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+<!-- This is enabling authentication we have to use <login-config> element -->
+<!-- We have sub element <auth_method> where we have 4 of them we use now BASIC -->
+  <login-config>
+  	<auth-method>BASIC</auth-method>
+  </login-config>
 </web-app>
