@@ -8,4 +8,11 @@
   <login-config>
   	<auth-method>BASIC</auth-method>
   </login-config>
+  
+  <!-- When it's time for authorization, the container will map its vendor-specific
+  "role" information to whatever <role-name>'s it finds in your DD's <security-role>-->
+  <security-role><role-name>Admin</role-name></security-role>
+  <security-role><role-name>Member</role-name></security-role>
+  <security-role><role-name>Guest</role-name></security-role>
+  
 </web-app>
