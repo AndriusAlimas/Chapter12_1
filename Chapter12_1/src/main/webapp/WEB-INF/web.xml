@@ -1,8 +1,10 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="ISO-8859-1" ?>
 
-<web-app>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+    version="2.4">
+    
 <!-- This is enabling authentication we have to use <login-config> element -->
 <!-- We have sub element <auth_method> where we have 4 of them we use now BASIC -->
   <login-config>
@@ -15,4 +17,37 @@
   <security-role><role-name>Member</role-name></security-role>
   <security-role><role-name>Guest</role-name></security-role>
   
+<!-- To Authorization you need to declare SECURITY CONSTRAINT -->  
+<security-constraint>
+
+	<!-- Inside Security constraint we use web resource COLLECTION -->
+	<web-resource-collection>
+	
+<!--  We add to this collection using giving name web resource name(one item) This is
+mandatory name used by tools. You won't see this name used anywhere else.. -->
+		<web-resource-name>UpdateRecipes</web-resource-name>
+		
+		<!-- url pattern defines the resource to be CONSTRAINED! -->
+		<url-pattern>/Beer/AddRecipe/*</url-pattern>
+		<!-- you can have more than one constraint resource -->
+		<url-pattern>/Beer/ReviewRecipe/*</url-pattern>
+		
+		<!-- The <http-method> elements describe which HTTP methods are constrained
+in other words RESTRICTED for the resources defined by the URL pattern :-->
+		<http-method>GET</http-method>
+		<http-method>POST</http-method>
+
+	</web-resource-collection>
+	
+	<!-- The optional <auth-constraint> element lists which roles CAN invoke the 
+	constrained HTTP Methods. In other words, it says WHO is allowed to do GET
+	and POST on the specified URL patterns: -->
+	
+	<auth-constraint>
+		<role-name>Admin</role-name>
+		<role-name>Member</role-name>
+	</auth-constraint>
+	
+</security-constraint>  
+
 </web-app>
