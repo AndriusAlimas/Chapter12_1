@@ -50,4 +50,23 @@ in other words RESTRICTED for the resources defined by the URL pattern :-->
 	
 </security-constraint>  
 
+<servlet>
+	<servlet-name>MyServlet</servlet-name>
+	<servlet-class>com.example.servlet.MyServlet</servlet-class>
+
+<!-- The security-role-ref element maps programmatic ( hard-coded) role names
+to declaritive <security-role> elements, so Container look first on this element
+programmer decide in servlet program he use Manager, he dont know vendor specific
+role so he made up name and role-link we have to match with real role name
+to security-role element!! -->	
+	<security-role-ref>
+		<role-name>Manager</role-name>
+		<role-link>Admin</role-link>
+	</security-role-ref>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>MyServlet</servlet-name>
+	<url-pattern>/Beer/AddRecipe/just.do</url-pattern>
+</servlet-mapping>
 </web-app>
